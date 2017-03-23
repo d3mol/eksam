@@ -34,9 +34,18 @@ require_once("functions.php");
 						header("Location: index.php?msg={$msg}");
 					} else {
 						// not
-						
+						$msg_date = date("d.m.Y", strtotime($rights_check[1]));
+						$msg = "Kaart number ".$_GET["search_card_nr"]." saab ust number ".$_GET["search_door_nr"]." avada ja see kehtib kuni {$msg_date}.";
+						header("Location: index.php?msg={$msg}");
 					}
+				} else {
+					// lõpmatu kehtivusega
+					$msg = "Kaart number ".$_GET["search_card_nr"]." saab ust number ".$_GET["search_door_nr"]." avada.";
+					header("Location: index.php?msg={$msg}");				
 				}
+			} else {
+				$msg = "Kaart number ".$_GET["search_card_nr"]." ei saa ust number ".$_GET["search_door_nr"]." avada.";
+				header("Location: index.php?msg={$msg}");
 			}
 		}
 	}
@@ -84,7 +93,11 @@ require_once("functions.php");
 <head>
 	<meta charset="UTF-8">
 	<title>Uksed</title>
-	
+	<style>
+		table, th, td {
+			border: 1px solid black;
+		}
+	</style>
 </head>
 <body>
 		
@@ -102,13 +115,38 @@ require_once("functions.php");
 			<input type="submit" name="search" value="Kontrolli">
 		</form>
 	
-	<br>
-		Kaart: 1 Ukse number: 5 ja 7, aegumatu<br>
-		Kaart: 20003000 Ukse number: 6, kehtivus läbi<br>
-		Kaart: 20003001 Ukse number: 5, kehtib<br>
 	
-	 <a href="login.php">logi sisse</a> 
 	 
-	
+	 
+	<table style="width:40%">
+		<tr>
+			<th>kaardi nr</th>
+			<th>ukse nr</th>
+			<th>kehtivus</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>5</td>
+			<td>aegumatu</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>7</td>
+			<td>aegumatu</td>
+		</tr>
+		<tr>
+			<td>20003000</td>
+			<td>6</td>
+			<td>läbi</td>
+		</tr>
+		<tr>
+			<td>20003001</td>
+			<td>5</td>
+			<td>kehtib</td>
+		</tr>
+	</table> 
+	 
+	 <a href="login.php">logi sisse</a> 
+
 </body>
 </html>
