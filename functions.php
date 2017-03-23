@@ -1,11 +1,10 @@
 <?php
-
+	
 	
 	
 	// polnud aega et seda korrektselt teha teha
 	$mysqli = new mysqli("localhost", "root", "root", "uksed");
 	$mysqli->set_charset("utf8");
-
 	
 	
 	function checkCardAndDoor($card_nr, $door_nr){
@@ -27,15 +26,9 @@
 			array_push($results, 0);
 		}
 		return $results;
-		
-		/*if($stmt->fetch()){
-			array_push($results);*/
 	}
-
-
-
-
 	
+
 	function checkIfADoorExists($door_nr){
 		global $mysqli;
 		$stmt = $mysqli->prepare("SELECT door_nr FROM doors WHERE door_nr=?");
@@ -49,21 +42,21 @@
 		return $result;
 	}
 	
-
 	
-/*
+	
+		/*
 	function checkDoors(){
 		global $mysqli;
 		//"$stmt = $mysqli->prepare(SELECT door_nr FROM doors WHERE door_nr=?)"
 		
 		$stmt->bind_param();
-*/	
+*/
 	
 	
 	
 	
 	//et kaart oleks olemas
-	unction checkIfACardExists($card_nr){
+	function checkIfACardExists($card_nr){
 		global $mysqli;
 		$stmt = $mysqli->prepare("SELECT card_nr FROM cards WHERE card_nr=?");
 		$stmt->bind_param("i", $card_nr);
@@ -74,7 +67,12 @@
 			$result = $card_nr_db;
 		}
 		return $result;
+		
+		/*if($stmt->fetch()){
+			array_push($results);*/
 	}
 	
 	
+	
+
 ?>
